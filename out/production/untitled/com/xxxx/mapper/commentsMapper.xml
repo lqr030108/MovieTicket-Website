@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(Mapper)层接口。 -->
+<mapper namespace="com.xxxx.mapper.commentsMapper">
+    <!-- id：对应Dao(Mapper)层接口方法名 parameterType：指定输入参数类型 -->
+    <!-- useGeneratedKeys = "true"把新增加的主键赋值到自己定义的keyProperty（id）中 -->
+    <insert id="insert" parameterType="com.xxxx.entity.comments">
+        insert into comments (id, cli_id, ses_id, score, comment, time) values (#{id},#{cliId},#{sesId},#{score},#{comment},#{time});
+    </insert>
+    <select id="countBycliId" parameterType="Integer" resultType="Integer">
+        select count(*) from comments where cli_id = #{cliId}
+    </select>
+    <select id="countBysesId" parameterType="Integer" resultType="Integer">
+        select count(*) from comments where ses_id = #{sesId}
+    </select>
+    <select id="selectBycliId" parameterType="Integer" resultType="com.xxxx.entity.comments">
+        select * from comments where cli_id = #{cliId}
+    </select>
+    <select id="selectBysesId" parameterType="Integer" resultType="com.xxxx.entity.comments">
+        select * from comments where ses_id = #{sesId}
+    </select>
+    <select id="selectBycliIdsesId" resultType="com.xxxx.entity.comments">
+        select * from comments where cli_id = #{0} and ses_id = #{1}
+    </select>
+
+</mapper>
+
+
+

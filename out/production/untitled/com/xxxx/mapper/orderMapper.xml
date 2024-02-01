@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(Mapper)层接口。 -->
+<mapper namespace="com.xxxx.mapper.orderMapper">
+    <!-- id：对应Dao(Mapper)层接口方法名 parameterType：指定输入参数类型 -->
+    <!-- useGeneratedKeys = "true"把新增加的主键赋值到自己定义的keyProperty（id）中 -->
+    <insert id="insertSelective" parameterType="com.xxxx.entity.orders">
+        insert into orders(id, cliId, sesId, orderTime, rowId, columnId) values (#{id},#{cliId},#{sesId},#{orderTime},#{rowId},#{columnId})
+    </insert>
+    <select id="findordersByCliId" parameterType="Integer" resultType="com.xxxx.entity.orders">
+        select * from orders where cliId = #{cliId}
+    </select>
+
+</mapper>
+
+
+

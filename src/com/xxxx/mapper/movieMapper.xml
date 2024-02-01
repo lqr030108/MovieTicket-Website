@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首先来解析 namespace：命名空间，此属性通常用来映射Dao(Mapper)层接口。 -->
+<mapper namespace="com.xxxx.mapper.movieMapper">
+    <!-- id：对应Dao(Mapper)层接口方法名 parameterType：指定输入参数类型 -->
+    <!-- useGeneratedKeys = "true"把新增加的主键赋值到自己定义的keyProperty（id）中 -->
+    <select id="selectByactor" parameterType="String" resultType="com.xxxx.entity.Movie">
+       select * from movie where actor = #{actor}
+    </select>
+    <select id="selectAll" parameterType="String" resultType="com.xxxx.entity.Movie">
+        select * from movie
+    </select>
+    <select id="selectBydirector" parameterType="String" resultType="com.xxxx.entity.Movie">
+        select * from movie where director = #{director}
+    </select>
+    <select id="selectBystatus" parameterType="Integer" resultType="com.xxxx.entity.Movie">
+        select * from movie where status = #{status}
+    </select>
+    <select id="selectBytype" parameterType="String" resultType="com.xxxx.entity.Movie">
+        select * from movie where type = #{type}
+    </select>
+    <select id="selectByLikemovName" parameterType="String" resultType="com.xxxx.entity.Movie">
+        select * from movie where movName like concat('%',#{movName},'%')
+    </select>
+    <insert id="insert" parameterType="com.xxxx.entity.Movie" >
+        insert into movie (movName, type, showtime, runningtime, director, actor, introduction, status, image) values (#{movName},#{type},#{showtime},#{runningtime},#{director},#{actor},#{introduction},#{status},#{image});
+    </insert>
+    <delete id="deleteByPrimaryKey" parameterType="Integer">
+        delete from movie where id = #{id}
+    </delete>
+    <select id="selectBytime" resultType="com.xxxx.entity.Movie">
+        select * from movie where #{0} > showtime and showtime > #{1}
+    </select>
+    <select id="selectByPrimaryKey" parameterType="Integer" resultType="com.xxxx.entity.Movie">
+        select * from movie where id = #{id}
+    </select>
+    <update id="updateByPrimaryKeySelective" parameterType="Integer">
+        update movie set status = 1 where id = #{id}
+    </update>
+    <update id="outdateByPrimaryKeySelective" parameterType="Integer">
+        update movie set status = -1 where id = #{id}
+    </update>
+
+</mapper>
+
+
+
